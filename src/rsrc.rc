@@ -1,0 +1,69 @@
+#include <windows.h>
+100 ICON MOVEABLE PURE LOADONCALL DISCARDABLE "pic/icon.ico"
+HB1 BITMAP "pic/spsc.bmp"
+HB2 BITMAP "pic/progb.bmp"
+101 BITMAP "pic/new.bmp"
+102 BITMAP "pic/new.bmp"
+103 BITMAP "pic/open.bmp"
+104 BITMAP "pic/save.bmp"
+105 BITMAP "pic/add.bmp"
+106 BITMAP "pic/build.bmp"
+107 BITMAP "pic/ftc.bmp"
+108 BITMAP "pic/exit.bmp"
+1 24 "ek.exe.Manifest"
+
+200 MENU 
+BEGIN
+	POPUP "&Fichier"
+	BEGIN
+		MENUITEM "&Nouveau programme\tCtl+N", 201
+		MENUITEM "&Ouvrir...\tCtl+O", 202
+		MENUITEM "&Sauver le fichier courant\tCtl+S", 203
+		MENUITEM "Sauver comme...", 204
+		MENUITEM SEPARATOR
+		MENUITEM "&Fermer\tCtl+F", 205
+		MENUITEM "&Quitter\tAlt+F4", 206
+	END
+	POPUP "&Edition"
+	BEGIN
+		MENUITEM "Défaire\tCtl+Z", 211
+		MENUITEM "Refaire\tCtl+Y", 212
+		MENUITEM SEPARATOR
+		MENUITEM "Copier\tCtl+C", 213
+		MENUITEM "Couper\tCtl+X", 214
+		MENUITEM "Coller\tCtl+V", 215
+		MENUITEM "Supprimer", 216
+		MENUITEM "Selectionner tout\tCtl+A", 217
+	END
+	POPUP "E&xécution"
+	BEGIN
+		MENUITEM "Exécuter\tCtl+E", 221
+		MENUITEM "Options d'exécution\tCtl+O", 222
+	END
+	POPUP "&Aide"
+	BEGIN
+		MENUITEM "Comment programmer\tCtl+H", 231
+		MENUITEM "Page internet associée", 232
+		MENUITEM "Université de Nice Sophia Antipolis", 233
+		MENUITEM "A propos de...", 234
+	END
+END
+
+300 DIALOG DISCARDABLE  100, 100, 218,252
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "EKzecuteur - A propos de..."
+FONT 8, "Tahoma"
+BEGIN
+     CONTROL "Executeur Emmanuel Kounalis : L'interprète du langage K", -1, "static", SS_CENTER | WS_CHILD | WS_VISIBLE, 0, 0, 206, 10
+     CONTROL "- Projet étudiant -", -1, "static", SS_CENTER | WS_CHILD | WS_VISIBLE, 0, 10, 206, 10
+     CONTROL "HB1", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE | SS_BITMAP, 0, 20, 201, 150
+     CONTROL "K.L. - L.B.", -1, "static", SS_CENTER | WS_CHILD | WS_VISIBLE, 0, 150, 206, 10
+     CONTROL "(étudiants responsables du projet)", -1, "static", SS_CENTER | WS_CHILD | WS_VISIBLE, 0, 160, 206, 10
+     CONTROL "__", -1, "static", SS_CENTER | WS_CHILD | WS_VISIBLE, 0, 170, 206, 10
+     CONTROL "Ce projet ne fait l'objet d'aucune licence.", -1, "static", SS_CENTER | WS_CHILD | WS_VISIBLE, 0, 180, 206, 10
+     CONTROL "Son code source peut etre exploité a toute fin.", -1, "static", SS_CENTER | WS_CHILD | WS_VISIBLE, 0, 190, 206, 10
+     CONTROL "Universite de Nice Sophia-Antipolis", -1, "static", SS_CENTER | WS_CHILD | WS_VISIBLE, 0, 200, 200, 10
+     CONTROL "Licence Informatique deuxième annee 2004-2005", -1, "static", SS_CENTER | WS_CHILD | WS_VISIBLE, 0, 210, 206, 10
+     CONTROL "Fermer", 301, "BUTTON", SS_CENTER | WS_CHILD | WS_VISIBLE, 54, 230, 100, 15
+END
+
