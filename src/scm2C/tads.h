@@ -1,10 +1,6 @@
-#include <stdarg.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
 #ifndef TADS_H
 #define TADS_H
+
 #define _(a,b) Symbole(a,b)
 #define NIL (Symbole(EK_SYMBOLE,"\0"))
 #define VAL(a)(a.type==EK_ENTIER ? (int*)a.valeur : (a.type==EK_SYMBOLE ? *(char**)a.valeur : (a.type==EK_TABLEAU ? *(int**)a.valeur : (a.type==EK_BOOLEEN ? (ek_bool*)a.valeur : *(P_LISTE*)a.valeur))))

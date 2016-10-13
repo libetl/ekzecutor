@@ -1,4 +1,8 @@
+#include <stdio.h>
+#include <windows.h>
+#include "../scm2C/tads.h"
 #include "args.h"
+#include "interpret.h"
 #include "../ek.h"
 
 void DrawTable(int xdraw,int ydraw,int vals[])

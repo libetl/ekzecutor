@@ -1,5 +1,3 @@
-#include <windows.h>
-
 #ifndef IDE_H
 #define IDE_H
 

@@ -1,5 +1,6 @@
 #ifndef AFFECT_H
 #define AFFECT_H
+
 int* vector_swap(int** T,int i,int j);
 void trier(int* T,int i,int j);
 P_LISTE LSort(P_LISTE l);

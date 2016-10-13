@@ -1,3 +1,5 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include "../scm2C/tads.h"
 #include "affect.h"
 #include "args.h"

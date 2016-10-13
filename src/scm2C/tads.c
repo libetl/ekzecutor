@@ -1,5 +1,6 @@
-#include "tads.h"
+#include <stdio.h>
 #include <windows.h>
+#include "tads.h"
 
 symbol Symbole(ek_type type,...)
 {

@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <windows.h>
 #include "../ek.h"
 #include "../ide/ide.h"

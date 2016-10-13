@@ -1,7 +1,10 @@
 #include <windows.h>
 #include <commctrl.h>
+#include <stdio.h>
 #include "ide/ide.h"
 #include "ek.h"
+#include "scm2C/tads.h"
+#include "k/interpret.h"
 
 int i=1;
 

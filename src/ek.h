@@ -1,5 +1,3 @@
-#include <windows.h>
-#include <time.h>
 #ifndef EK_H
 #define EK_H
 

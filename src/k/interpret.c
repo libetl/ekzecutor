@@ -1,9 +1,11 @@
 #include <windows.h>
+#include <stdio.h>
+#include "../scm2C/tads.h"
 #include "args.h"
 #include "affect.h"
 #include "convert.h"
 #include "display.h"
-#include "../scm2C/tads.h"
+#include "interpret.h"
 #include "../ek.h"
 
 symbol Interpret(int* xdraw,int* ydraw,symbol Func,P_LISTE Vals,ek_bool DisplayR)
