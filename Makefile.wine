@@ -1,0 +1,47 @@
+CC   = wineg++
+MKDIR = mkdir
+WINDRES = wrc
+RES  = target/ek_private.res
+OBJ  = target/affect.o target/args.o target/interpret.o target/tads.o target/ek.o target/ide.o target/convert.o target/display.o target/k.o $(RES)
+LIBS =  -mwindows -lcomctl32
+BIN  = ekzecuteur.exe
+OPTS = -pedantic -Wall -ansi -fpermissive
+
+$(BIN): $(OBJ)
+	$(CC) $(OBJ) -o "bin/$(BIN)" $(LIBS)
+
+target/:
+	$(MKDIR) target
+
+target/ide.o: src/ide/ide.h src/ide/ide.c
+	$(CC) -c src/ide/ide.c -o target/ide.o $(OPTS)
+
+target/tads.o: src/scm2C/tads.h src/scm2C/tads.c
+	$(CC) -c src/scm2C/tads.c -o target/tads.o $(OPTS)
+
+target/ek.o: src/ek.c src/ek.h
+	$(CC) -c src/ek.c -o target/ek.o $(OPTS)
+
+target/args.o: src/k/args.h src/k/args.c
+	$(CC) -c src/k/args.c -o target/args.o $(OPTS)
+
+target/affect.o: target/ src/k/affect.h src/k/affect.c
+	$(CC) -c src/k/affect.c -o target/affect.o $(OPTS)
+
+target/convert.o: src/k/convert.h src/k/convert.c
+	$(CC) -c src/k/convert.c -o target/convert.o $(OPTS)
+
+target/display.o: src/k/display.h src/k/display.c
+	$(CC) -c src/k/display.c -o target/display.o $(OPTS)
+
+target/interpret.o: src/k/interpret.h src/k/interpret.c
+	$(CC) -c src/k/interpret.c -o target/interpret.o $(OPTS)
+
+target/k.o: src/k/k.h src/k/k.c
+	$(CC) -c src/k/k.c -o target/k.o $(OPTS)
+
+target/ek_private.res: src/rsrc.rc 
+	$(WINDRES) -i src/rsrc.rc --input-format=rc -o target/ek_private.res -O coff 
+
+clean: 
+	rm -f $(OBJ) $(RES)

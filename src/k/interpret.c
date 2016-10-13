@@ -6,7 +6,7 @@
 #include "../scm2C/tads.h"
 #include "../ek.h"
 
-symbol Interpret(int* xdraw,int* ydraw,symbol Func,P_LISTE Vals,bool DisplayR)
+symbol Interpret(int* xdraw,int* ydraw,symbol Func,P_LISTE Vals,ek_bool DisplayR)
 {
   POINT lp[2];
   FILE* fp;
@@ -28,7 +28,7 @@ symbol Interpret(int* xdraw,int* ydraw,symbol Func,P_LISTE Vals,bool DisplayR)
   }
   else
   {
-    bool found=FAUX;
+    ek_bool found=FAUX;
     while(!found)
     {
       SearchFor(fp,_(EK_SYMBOLE,"Initialisation"));
@@ -126,7 +126,7 @@ symbol Interpret(int* xdraw,int* ydraw,symbol Func,P_LISTE Vals,bool DisplayR)
       DrawList(*xdraw,*ydraw+3,*(P_LISTE*)sym.valeur);
     else if(est_booleen(sym))
     {
-      if(*(bool*)sym.valeur==VRAI)TextOut(gc,*xdraw+50,*ydraw+3,"vrai",4);
+      if(*(ek_bool*)sym.valeur==VRAI)TextOut(gc,*xdraw+50,*ydraw+3,"vrai",4);
       else TextOut(gc,*xdraw+50,*ydraw+3,"faux",4);
     }
     else if(est_symbol(sym))

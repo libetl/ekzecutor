@@ -7,7 +7,7 @@
 #define TADS_H
 #define _(a,b) Symbole(a,b)
 #define NIL (Symbole(EK_SYMBOLE,"\0"))
-#define VAL(a)(a.type==EK_ENTIER ? *(int*)a.valeur : (a.type==EK_SYMBOLE ? *(char**)a.valeur : (a.type==EK_TABLEAU ? *(int**)a.valeur : (a.type==EK_BOOLEEN ? *(bool*)a.valeur : *(P_LISTE*)a.valeur))))
+#define VAL(a)(a.type==EK_ENTIER ? (int*)a.valeur : (a.type==EK_SYMBOLE ? *(char**)a.valeur : (a.type==EK_TABLEAU ? *(int**)a.valeur : (a.type==EK_BOOLEEN ? (ek_bool*)a.valeur : *(P_LISTE*)a.valeur))))
 #define EK_ENTIER 0
 #define EK_SYMBOLE 1
 #define EK_TABLEAU 2
@@ -16,7 +16,7 @@
 #define FAUX 0
 #define VRAI 1
 
-typedef unsigned char bool;
+typedef unsigned char ek_bool;
 
 typedef unsigned char ek_type;
 
@@ -30,13 +30,13 @@ typedef struct LISTE{
   struct LISTE *suivant;
 }T_LISTE,*P_LISTE;
 
-bool null(P_LISTE l);
-bool equal(symbol a, symbol b);
-bool est_entier(symbol a);
-bool est_list(symbol a);
-bool est_booleen(symbol a);
-bool est_tableau(symbol a);
-bool est_symbol(symbol a);
+ek_bool null(P_LISTE l);
+ek_bool equal(symbol a, symbol b);
+ek_bool est_entier(symbol a);
+ek_bool est_list(symbol a);
+ek_bool est_booleen(symbol a);
+ek_bool est_tableau(symbol a);
+ek_bool est_symbol(symbol a);
 symbol Symbole(ek_type type,...);
 symbol car(P_LISTE l);
 symbol caadr(P_LISTE l);

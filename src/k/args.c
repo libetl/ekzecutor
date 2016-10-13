@@ -139,19 +139,19 @@ P_LISTE Transform_vals(P_LISTE vals,symbol func,P_LISTE arg1,P_LISTE val1,int* x
   return cons(car(vals),Transform_vals(cdr(vals),func,arg1,val1,xdraw,ydraw));
 }
 
-bool evalConds(P_LISTE conds,symbol func,P_LISTE args,P_LISTE vals,P_LISTE accu)
+ek_bool evalConds(P_LISTE conds,symbol func,P_LISTE args,P_LISTE vals,P_LISTE accu)
 {
   if(null(conds) && (null(accu) || null(cdr(accu)) || null(cddr(accu))))return VRAI;
-  if(null(conds))return *(bool*)eval(cadr(accu),FindValueOf(car(accu),func,args,vals,0),FindValueOf(caddr(accu),func,args,vals,0)).valeur;
+  if(null(conds))return *(ek_bool*)eval(cadr(accu),FindValueOf(car(accu),func,args,vals,0),FindValueOf(caddr(accu),func,args,vals,0)).valeur;
   if(equal(car(conds),_(EK_SYMBOLE,"tt")))return VRAI;
   if(equal(car(conds),_(EK_SYMBOLE,"ff")))return FAUX;
-  if(est_booleen(car(conds)))return *(bool*)car(conds).valeur;
-  if(equal(car(conds),_(EK_SYMBOLE,"^")))return *(bool*)eval(cadr(accu),FindValueOf(car(accu),func,args,vals,0),FindValueOf(caddr(accu),func,args,vals,0)).valeur && evalConds(cdr(conds),func,args,vals,list(NIL));
-  if(equal(car(conds),_(EK_SYMBOLE,"v")))return *(bool*)eval(cadr(accu),FindValueOf(car(accu),func,args,vals,0),FindValueOf(caddr(accu),func,args,vals,0)).valeur || evalConds(cdr(conds),func,args,vals,list(NIL));
+  if(est_booleen(car(conds)))return *(ek_bool*)car(conds).valeur;
+  if(equal(car(conds),_(EK_SYMBOLE,"^")))return *(ek_bool*)eval(cadr(accu),FindValueOf(car(accu),func,args,vals,0),FindValueOf(caddr(accu),func,args,vals,0)).valeur && evalConds(cdr(conds),func,args,vals,list(NIL));
+  if(equal(car(conds),_(EK_SYMBOLE,"v")))return *(ek_bool*)eval(cadr(accu),FindValueOf(car(accu),func,args,vals,0),FindValueOf(caddr(accu),func,args,vals,0)).valeur || evalConds(cdr(conds),func,args,vals,list(NIL));
   return evalConds(cdr(conds),func,args,vals,append_val(accu,car(conds)));
 }
 
-bool evalConds2(P_LISTE conds,P_LISTE args,P_LISTE vals)
+ek_bool evalConds2(P_LISTE conds,P_LISTE args,P_LISTE vals)
 {
   if(null(args) && null(conds))return VRAI;
   if(null(conds) || null(args)){perror("Erreur de prototypage");return FAUX;}

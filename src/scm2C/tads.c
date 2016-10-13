@@ -46,37 +46,37 @@ symbol Symbole(ek_type type,...)
     }
     case EK_BOOLEEN:
     {
-      bool *b;
-      b=malloc(sizeof(bool*));
+      ek_bool *b;
+      b=malloc(sizeof(ek_bool*));
       *b=va_arg(marker,int);
-      a.valeur=(bool*)b;
+      a.valeur=(ek_bool*)b;
       break;
     }
   }
   return a;
 }
 
-bool est_entier(symbol a)
+ek_bool est_entier(symbol a)
 {
   return a.type==EK_ENTIER;
 }
 
-bool est_symbol(symbol a)
+ek_bool est_symbol(symbol a)
 {
   return a.type==EK_SYMBOLE;
 }
 
-bool est_booleen(symbol a)
+ek_bool est_booleen(symbol a)
 {
   return a.type==EK_BOOLEEN;
 }
 
-bool est_tableau(symbol a)
+ek_bool est_tableau(symbol a)
 {
   return a.type==EK_TABLEAU;
 }
 
-bool est_list(symbol a)
+ek_bool est_list(symbol a)
 {
   return a.type==EK_LISTE;
 }
@@ -148,7 +148,7 @@ P_LISTE append(P_LISTE l1,P_LISTE l2)
   return l;
 }
 
-bool null(P_LISTE l)
+ek_bool null(P_LISTE l)
 {
   return l==NULL || l->suivant==NULL || equal(car(l),NIL);
 }
@@ -208,7 +208,7 @@ P_LISTE cdadr(P_LISTE l)
   return cdr(*(P_LISTE*)cadr(l).valeur);
 }
 
-bool equal(symbol a, symbol b)
+ek_bool equal(symbol a, symbol b)
 {
   if(a.type!=b.type)return FAUX;
   switch(a.type)
@@ -291,7 +291,7 @@ symbol read(FILE* fp)
     a=_(EK_LISTE,l);
 
   }else{
-    bool ent=VRAI;
+    ek_bool ent=VRAI;
     int i=0,k;
     a.type=EK_SYMBOLE;
     s[i++]=c;
@@ -372,7 +372,7 @@ char* Aff(symbol a)
     case EK_SYMBOLE:
       return *(char**)a.valeur;break;
     case EK_BOOLEEN:
-      if(*(bool*)a.valeur) return "#t";
+      if(*(ek_bool*)a.valeur) return "#t";
       else return "#f";break;
     case EK_LISTE:
       return affliste(*(P_LISTE*)a.valeur);break;

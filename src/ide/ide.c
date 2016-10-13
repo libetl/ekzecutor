@@ -197,7 +197,7 @@ HWND FaireTB(HWND hwnd,HMENU menu,HINSTANCE hThisInstance)
    SendMessage(hTB, TB_SETBITMAPSIZE, (WPARAM)0, (LPARAM)MAKELONG(20, 20));
    for (i=1;i<=8;i++)
    {
-     tbab.hInst = (HINSTANCE)GetWindowLong(hwnd, GWL_HINSTANCE); 
+     tbab.hInst = (HINSTANCE)GetWindowLong(hwnd, -6);//GWL_HINSTANCE 
      tbab.nID   = 100+i; 
      SendMessage(hTB, TB_ADDBITMAP, (WPARAM) 1, (LPARAM) &tbab);
      GetWindowRect(hwnd,&rc);
