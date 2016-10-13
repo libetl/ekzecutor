@@ -7,6 +7,8 @@
 #include "k/interpret.h"
 
 int i=1;
+HBITMAP spsc, progb;
+HDC gc2;
 
 LRESULT CALLBACK SplashProcedure (HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {

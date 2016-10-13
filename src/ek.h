@@ -2,9 +2,9 @@
 #define EK_H
 
 static HINSTANCE Inst = NULL;
-HBITMAP spsc, progb;
-HDC gc, gc2;
-HMENU menu;
+extern HBITMAP spsc, progb;
+extern HDC gc, gc2;
+extern HMENU menu;
 
 LRESULT CALLBACK SplashProcedure (HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
 void Splash (HINSTANCE hThisInstance, int nFunsterStil);

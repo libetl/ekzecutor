@@ -8,7 +8,7 @@ BIN  = ekzecuteur.exe
 OPTS = -pedantic -Wall -ansi -fpermissive
 
 $(BIN): $(OBJ)
-	$(CC) $(OBJ) -o "bin/$(BIN)" $(LIBS)
+	$(CC) $(OBJ) -o "target/$(BIN)" $(LIBS)
 
 target/:
 	$(MKDIR) target

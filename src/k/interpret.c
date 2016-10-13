@@ -8,6 +8,8 @@
 #include "interpret.h"
 #include "../ek.h"
 
+HDC gc;
+
 symbol Interpret(int* xdraw,int* ydraw,symbol Func,P_LISTE Vals,ek_bool DisplayR)
 {
   POINT lp[2];
