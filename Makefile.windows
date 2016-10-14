@@ -1,43 +1,47 @@
-CC   = gcc.exe
-WINDRES = windres.exe
-RES  = res/ek_private.res
-OBJ  = obj/affect.o obj/args.o obj/interpret.o obj/tads.o obj/ek.o obj/ide.o obj/convert.o obj/display.o obj/k.o $(RES)
+CC   = g++.exe
+MKDIR = mkdir
+WINDRES = windres.exe 
+RES  = target/ek_private.res
+OBJ  = target/affect.o target/args.o target/interpret.o target/tads.o target/ek.o target/ide.o target/convert.o target/display.o target/k.o $(RES)
 LIBS =  -mwindows -lcomctl32
 BIN  = ekzecuteur.exe
-OPTS = -pedantic -Wall -ansi
+OPTS = -pedantic -Wall -ansi -fpermissive
 
 $(BIN): $(OBJ)
-	$(CC) $(OBJ) -o "bin/$(BIN)" $(LIBS)
+	$(CC) $(OBJ) -o "target/$(BIN)" $(LIBS)
 
-obj/ide.o: ide/ide.h ide/ide.c
-	$(CC) -c ide/ide.c -o obj/ide.o $(OPTS)
+target/:
+	$(MKDIR) target
 
-obj/tads.o: scm2C/tads.h scm2C/tads.c
-	$(CC) -c scm2C/tads.c -o obj/tads.o $(OPTS)
+target/ide.o: src/ide/ide.h src/ide/ide.c
+	$(CC) -c src/ide/ide.c -o target/ide.o $(OPTS)
 
-obj/ek.o: ek.c ek.h
-	$(CC) -c ek.c -o obj/ek.o $(OPTS)
+target/tads.o: src/scm2C/tads.h src/scm2C/tads.c
+	$(CC) -c src/scm2C/tads.c -o target/tads.o $(OPTS)
 
-obj/args.o: k/args.h k/args.c
-	$(CC) -c k/args.c -o obj/args.o $(OPTS)
+target/ek.o: src/ek.c src/ek.h
+	$(CC) -c src/ek.c -o target/ek.o $(OPTS)
 
-obj/affect.o: k/affect.h k/affect.c
-	$(CC) -c k/affect.c -o obj/affect.o $(OPTS)
+target/args.o: src/k/args.h src/k/args.c
+	$(CC) -c src/k/args.c -o target/args.o $(OPTS)
 
-obj/convert.o: k/convert.h k/convert.c
-	$(CC) -c k/convert.c -o obj/convert.o $(OPTS)
+target/affect.o: target/ src/k/affect.h src/k/affect.c
+	$(CC) -c src/k/affect.c -o target/affect.o $(OPTS)
 
-obj/display.o: k/display.h k/display.c
-	$(CC) -c k/display.c -o obj/display.o $(OPTS)
+target/convert.o: src/k/convert.h src/k/convert.c
+	$(CC) -c src/k/convert.c -o target/convert.o $(OPTS)
 
-obj/interpret.o: k/interpret.h k/interpret.c
-	$(CC) -c k/interpret.c -o obj/interpret.o $(OPTS)
+target/display.o: src/k/display.h src/k/display.c
+	$(CC) -c src/k/display.c -o target/display.o $(OPTS)
 
-obj/k.o: k/k.h k/k.c
-	$(CC) -c k/k.c -o obj/k.o $(OPTS)
+target/interpret.o: src/k/interpret.h src/k/interpret.c
+	$(CC) -c src/k/interpret.c -o target/interpret.o $(OPTS)
 
-res/ek_private.res: rsrc.rc 
-	$(WINDRES) -i rsrc.rc --input-format=rc -o res/ek_private.res -O coff 
+target/k.o: src/k/k.h src/k/k.c
+	$(CC) -c src/k/k.c -o target/k.o $(OPTS)
+
+target/ek_private.res: src/rsrc.rc 
+	$(WINDRES) -i src/rsrc.rc --input-format=rc -o target/ek_private.res -O coff 
 
 clean: 
 	rm -f $(OBJ) $(RES)

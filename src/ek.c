@@ -1,6 +1,7 @@
 #include <windows.h>
 #include <commctrl.h>
 #include <stdio.h>
+#include <time.h>
 #include "ide/ide.h"
 #include "ek.h"
 #include "scm2C/tads.h"

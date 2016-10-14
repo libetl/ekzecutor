@@ -1,3 +1,4 @@
+#define _WIN32_IE 0x300
 #include <windows.h>
 #include <commctrl.h>
 #include <stdio.h>
