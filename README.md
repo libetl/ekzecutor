@@ -19,9 +19,9 @@ A K program is divided into recursive functions. They consist in an init clause,
 ```
 How to find the maximum value in an array :
 
- Initialisation MAXIMUM(T, i, n, max)=  MAXIMUM(T, 2, |T|, T[1])
- Différents cas i ⇐ n ^ T[i] >  max ⇒ MAXIMUM(T, i, n, max) = MAXIMUM(T, i + 1, n, T[i])
-                i ⇐ n ^ T[i] ⇐ max ⇒ MAXIMUM(T, i, n, max) = MAXIMUM(T, i + 1, n, max)
-                i >  n               ⇒ MAXIMUM(T, i, n, max) = max
+ Initialisation MAXIMUM(T, i, n, max) =  MAXIMUM(T, 2, |T|, T[1])
+ Différents cas i <= n ^ T[i] >  max  => MAXIMUM(T, i, n, max) = MAXIMUM(T, i + 1, n, T[i])
+                i <= n ^ T[i] <= max  => MAXIMUM(T, i, n, max) = MAXIMUM(T, i + 1, n, max)
+                i >  n                => MAXIMUM(T, i, n, max) = max
  Fin
 ```
