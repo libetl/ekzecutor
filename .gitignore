@@ -1,1 +1,9 @@
 target
+.codelite/.tern-port
+.codelite/refactoring.db
+*.session
+.codelite/compilation.db
+*.tags
+ekzecutor.mk
+*.project
+.codelite/.tern-project

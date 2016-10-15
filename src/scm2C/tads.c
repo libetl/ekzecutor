@@ -48,8 +48,8 @@ symbol Symbole(ek_type type,...)
     case EK_BOOLEEN:
     {
       ek_bool *b;
-      b=malloc(sizeof(ek_bool*));
-      *b=va_arg(marker,int);
+      b=(ek_bool*)malloc(sizeof(ek_bool));
+      *b=va_arg(marker,ek_bool);
       a.valeur=(ek_bool*)b;
       break;
     }
@@ -82,6 +82,20 @@ ek_bool est_list(symbol a)
   return a.type==EK_LISTE;
 }
 
+symbol symbol_de_type(ek_type type, void* valeur)
+{
+  if (type == EK_ENTIER)
+    return _(EK_ENTIER,*(int*)valeur);
+  if (type == EK_SYMBOLE)
+    return _(EK_SYMBOLE,*(char**)valeur);
+  if (type == EK_TABLEAU)
+    return _(EK_TABLEAU,*(int**)valeur);
+  if (type == EK_BOOLEEN)
+    return _(EK_BOOLEEN,*(ek_bool*)valeur);
+  if (type == EK_LISTE)
+    return _(EK_LISTE,*(P_LISTE*)valeur);
+}
+
 P_LISTE list(symbol arg1,...)
 {
   static char tmp[256]="";
@@ -96,7 +110,7 @@ P_LISTE list(symbol arg1,...)
   else strcpy(tmp,"null");
   while(i.type!=EK_SYMBOLE || tmp[0]!='\0')
   {
-    l2->courant=_(i.type,VAL(i));
+    l2->courant=symbol_de_type(i.type, i.valeur);
     l2->suivant=malloc(sizeof(T_LISTE));
     l2=l2->suivant;
     i=va_arg(marker,symbol);
@@ -127,8 +141,8 @@ P_LISTE append(P_LISTE l1,P_LISTE l2)
   else strcpy(tmp,"null");
   while(l1->courant.type!=EK_SYMBOLE || tmp[0]!='\0')
   {
-    lp->courant=_(l1->courant.type,VAL(l1->courant));
-    lp->suivant=malloc(sizeof(T_LISTE));
+    lp->courant=symbol_de_type(l1->courant.type,l1->courant.valeur);
+    lp->suivant=(P_LISTE)malloc(sizeof(T_LISTE));
     lp=lp->suivant;
     l1=l1->suivant;
     if(l1->courant.type==EK_SYMBOLE)strcpy(tmp,*(char**)l1->courant.valeur);
@@ -138,7 +152,7 @@ P_LISTE append(P_LISTE l1,P_LISTE l2)
   else strcpy(tmp,"null");
   while(l2->courant.type!=EK_SYMBOLE || tmp[0]!='\0')
   {
-    lp->courant=_(l2->courant.type,VAL(l2->courant));
+    lp->courant=symbol_de_type(l2->courant.type,l2->courant.valeur);
     lp->suivant=malloc(sizeof(T_LISTE));
     lp=lp->suivant;
     l2=l2->suivant;
@@ -214,8 +228,8 @@ ek_bool equal(symbol a, symbol b)
   if(a.type!=b.type)return FAUX;
   switch(a.type)
   {
-    case EK_ENTIER: return VAL(a)==VAL(b);break;
-    case EK_SYMBOLE:return strcmp(VAL(a),VAL(b))==0;break;
+    case EK_ENTIER: return *(int*)a.valeur==*(int*)b.valeur;break;
+    case EK_SYMBOLE:return strcmp(*(char**)a.valeur,*(char**)b.valeur)==0;break;
     case EK_TABLEAU:{
       int i,t,t2;
       t=taille_tableau(a);
@@ -225,10 +239,10 @@ ek_bool equal(symbol a, symbol b)
         if(*(*(int**)a.valeur+i)!=*(*(int**)b.valeur+i))return FAUX;
 	return VRAI;
       break;}
-    case EK_LISTE:  if(null(VAL(a)) || null(VAL(b)))return (null(VAL(a)) && null(VAL(b)));
-	            return equal(car(VAL(a)),car(VAL(b))) && equal(_(EK_LISTE,cdr(VAL(a))),_(EK_LISTE,cdr(VAL(b))));
+    case EK_LISTE:  if(null(*(P_LISTE*)a.valeur) || null(*(P_LISTE*)b.valeur))return (null(*(P_LISTE*)a.valeur) && null(*(P_LISTE*)b.valeur));
+	            return equal(car(*(P_LISTE*)a.valeur),car(*(P_LISTE*)b.valeur)) && equal(_(EK_LISTE,cdr(*(P_LISTE*)a.valeur)),_(EK_LISTE,cdr(*(P_LISTE*)b.valeur)));
 		    break;
-    case EK_BOOLEEN:return VAL(a)==VAL(b);break;
+    case EK_BOOLEEN:return *(ek_bool*)a.valeur==*(ek_bool*)b.valeur;break;
   }
   return FAUX;
 }
